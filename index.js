@@ -1,12 +1,14 @@
 for (let i = 0; i < document.querySelectorAll(".drum").length; i++) {
     document.querySelectorAll(".drum")[i].addEventListener("click", function () {
-        eachButton = this.innerHTML;
-        makeSound(eachButton)
+        let eachButton = this.innerHTML;
+        makeSound(eachButton);
+        animateButton(eachButton);
     });
 }
 document.addEventListener("keypress", function (event) {
-    makeSound(event.key)
-})
+    makeSound(event.key);
+    animateButton(event.key);
+});
 function makeSound(key) {
     switch (key) {
         case "w":
@@ -33,4 +35,11 @@ function makeSound(key) {
         default:
             return;
     }
+}
+function animateButton(currentButton) {
+    let pressedButton = document.querySelector("." + currentButton);
+    pressedButton.classList.add("pressed");
+    setTimeout(function () {
+        pressedButton.classList.remove("pressed");
+    }, 100)
 }
